@@ -1,13 +1,14 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { InputForm, Label } from "components/ContactForm/ContactForm.styled";
+import { InputForm } from "components/ContactForm/ContactForm.styled";
 import { filteredContact } from "store/contactSlice";
+import { RegisterLabel } from "components/Register/Register.styled";
 
 const Filter = () => {
     const dispatch = useDispatch()
 
     return (
-        <Label>Find contact by name
+        <RegisterLabel>Find contact by name
             <InputForm
                 onChange={(e)=>dispatch(filteredContact(e.target.value))}
                 type="text"
@@ -16,7 +17,7 @@ const Filter = () => {
                 title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
                 required
             />
-        </Label>
+        </RegisterLabel>
     );
 };
 

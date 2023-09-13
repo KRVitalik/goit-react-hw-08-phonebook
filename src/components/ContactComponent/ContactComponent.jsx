@@ -4,18 +4,25 @@ import { ToastContainer } from 'react-toastify';
 import Filter from 'components/Filter/Filter';
 import ContactForm from 'components/ContactForm/ContactForm';
 import ContactList from 'components/ContactList/ContactList';
-import { Container } from 'components/App.styled';
+import { RegisterFormContainer, RegisterPreTitle, RegisterPreTitleApp } from 'components/Register/Register.styled';
+import { Container } from './ContactComponent.styled';
+// import PerfectScrollbar from 'react-perfect-scrollbar'
+import 'react-perfect-scrollbar/dist/css/styles.css';
 
 const ContactComponent = () => {
   return (
-        <Container>
-      <h1>Phonebook</h1>
+    <RegisterFormContainer>
+      {/* <PerfectScrollbar> */}
+      <Container>
+        <RegisterPreTitle>My Very Own <RegisterPreTitleApp>Phone Book</RegisterPreTitleApp></RegisterPreTitle>
       <ContactForm/>
-      <h2>Contacts</h2>
+      <RegisterPreTitle>Contacts</RegisterPreTitle>
       <Filter/>
       <ContactList/>
+      </Container>
+      {/* </PerfectScrollbar> */}
       <ToastContainer />
-    </Container>
+      </RegisterFormContainer>
   )
 }
 

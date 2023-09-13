@@ -7,7 +7,9 @@ import { persistStore,
   PAUSE,
   PERSIST,
   PURGE,
-  REGISTER, } from 'redux-persist'
+    REGISTER,
+} from 'redux-persist'
+  
 
 export const store = configureStore({
     reducer: {

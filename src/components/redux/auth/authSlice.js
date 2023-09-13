@@ -1,7 +1,7 @@
 import persistReducer from "redux-persist/es/persistReducer";
 import storage from 'redux-persist/lib/storage'
 import { initialState } from "./initialState";
-import { login, logout, register } from "./authOperations";
+import { fetchCurrentUser, login, logout, register } from "./authOperations";
 
 const { createSlice } = require("@reduxjs/toolkit");
 
@@ -25,13 +25,19 @@ const authSlice = createSlice({
       state.user = initialState.user
       state.token = initialState.token
       state.isLoggedIn = initialState.isLoggedIn
+    })
+      .addCase(fetchCurrentUser.fulfilled, (state, action) => {
+      console.log(action.payload)
+      state.user = action.payload
+      state.isLoggedIn = true
       })
     }
 })
 
-const persistConfig = {
-    key: 'myContact',
+const authPersistConfig = {
+    key: 'auth',
     storage,
-};
+    whitelist: ['token'],
+  }
 
-export const persistedReducer = persistReducer(persistConfig, authSlice.reducer)
+export const persistedReducer = persistReducer(authPersistConfig, authSlice.reducer)

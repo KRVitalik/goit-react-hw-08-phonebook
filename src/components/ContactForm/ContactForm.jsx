@@ -1,20 +1,21 @@
 import React, { useState } from "react";
-import { Button, FormContainer, InputForm, Label } from "./ContactForm.styled";
+import { Button, FormContainer, InputForm } from "./ContactForm.styled";
 
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { addContact } from "store/contacts/contactsThunk";
+import { RegisterLabel } from "components/Register/Register.styled";
 
 const ContactForm = () => {
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [number, setNumber] = useState('');
 
   const contacts = useSelector(state => state.myContact.contacts)
   const dispatch = useDispatch()
 
   const handleInputChange = e => {
-    e.target.name === "name" ? setName(e.target.value) : setPhone(e.target.value)
+    e.target.name === "name" ? setName(e.target.value) : setNumber(e.target.value)
   };
 
   const handleSubmit = e => {
@@ -28,7 +29,7 @@ const ContactForm = () => {
 
     dispatch(addContact({
       name,
-      phone,
+      number,
     }))
 
     toast.success(`You add contact ${name} to your phonebook.`, {
@@ -41,7 +42,7 @@ const ContactForm = () => {
   return (
     <div>
       <FormContainer onSubmit={handleSubmit}>
-        <Label>Name
+        <RegisterLabel>Name
           <InputForm
             type="text"
             placeholder="Name"
@@ -50,8 +51,8 @@ const ContactForm = () => {
             required
             onChange={handleInputChange}
           />
-        </Label>
-        <Label>Number
+        </RegisterLabel>
+        <RegisterLabel>Number
           <InputForm
             type="tel"
             name="phone"
@@ -61,7 +62,7 @@ const ContactForm = () => {
             required
             onChange={handleInputChange}
           />
-        </Label>
+        </RegisterLabel>
         <Button type="submit">Add contact</Button>
       </FormContainer>
     </div>

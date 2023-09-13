@@ -10,11 +10,13 @@ padding:0;
 export const Contact = styled.li`
 display: flex;
 justify-content: space-between;
-    align-items: center;
-    border: 1px solid grey;
-    border-radius: 4px;
-    padding: 4px;
-  `
+align-items: center;
+border: 1px solid grey;
+border-radius: 4px;
+padding: 4px;
+width: 451px;
+`
+
 export const ContactInfo = styled.div`
 display:flex;
 justify-content: space-around;

@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com/'
 
@@ -18,6 +19,7 @@ const register = createAsyncThunk('auth/register', async credential => {
         token.set(data.token)
         return data;
     } catch (error) {
+        console.log(error.message)
         throw error;
     }
 })
@@ -25,10 +27,10 @@ const register = createAsyncThunk('auth/register', async credential => {
 const login = createAsyncThunk('auth/login', async credential => {
     try {
         const { data } = await axios.post('users/login', credential);
-        console.log(data.token)
         token.set(data.token)
         return data;
     } catch (error) {
+        console.log(error.message)
         throw error;
     }
 })
@@ -42,4 +44,19 @@ const logout = createAsyncThunk('auth/logout', async () => {
     }
 })
 
-export { register, login, logout }
+const fetchCurrentUser = createAsyncThunk('contacts/refresh', async (_, thunkAPI) => {
+    const state = thunkAPI.getState()
+    const persistedToken = state.auth.token
+
+    if (persistedToken === null) {
+        return thunkAPI.rejectWithValue()
+    }
+    
+    token.set(persistedToken)
+    try {
+        const { data } = await axios.get('/users/current');
+        return data
+    } catch(error){throw error;}
+});
+
+export { register, login, logout, fetchCurrentUser }
